@@ -1,4 +1,5 @@
 ﻿var Map = (function () {
+    var canvas;
     var interval;
     var count = 0;
     var images = [];
@@ -74,7 +75,8 @@
     function showImage() {
         if (count < 0) count = images.length - 1;
         if (count >= images.length) count = 0;
-        $("#map").attr("src", imgSrc(images[count], count));
+        var img = document.getElementById("img" + (count + 1000));
+        canvas.drawImage(img, 0, 0);
         $(".active").removeClass("active");
         $("#img" + (count + 1000)).addClass("active");
     }
@@ -135,6 +137,8 @@
     }
 
     function init() {
+        var c = document.getElementById("map");
+        canvas = c.getContext("2d");
         interval = setInterval(changeImage, 100);
         changeCount();
     }
