@@ -28,7 +28,7 @@ input {width: 40px;}
 	#map, #data img, #images { width: 100%; }
 	#images { width: 80%; padding: 10%;}
 	#loader { top: 60px; left: 50px;	}
-	#speed { width: 60%; }
+	#speed { width: 50%; }
 	body { margin: 0px;}
 }
 @media (max-width : 480px) {
