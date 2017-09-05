@@ -11,8 +11,17 @@
     }
 
     function loaded() {
-        $("#loader").fadeOut("slow");
-        $("#controls input").prop("disabled", false);
+        var loadedImages = 0
+        for (var i = 0; i < images.length; i++) {
+            if (isCached(images[i], i))
+                loadedImages++;
+        }
+        if (loadedImages != images.length) {
+            setTimeout(loaded, 500);
+        } else {
+            $("#loader").fadeOut("slow");
+            $("#controls input").prop("disabled", false);
+        }        
     }
 
     function changeCount() {
@@ -105,7 +114,7 @@
         image.attr("title", images[i]);
         if (i + 1 === images.length) {
             changeSpeed();
-            loaded()
+            loaded();
         } else if (i == 0) {
             var img = document.getElementById("img1000");
             canvas.drawImage(img, 0, 0);
