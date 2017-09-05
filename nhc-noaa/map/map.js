@@ -43,8 +43,8 @@
     }
 
     function sprite(image, id) {
-        var imgTag = "<img class='sprite' style='background:url(" +
-                        imgSrc(image, id) + ") 0 -465px'>";
+        var imgTag = "<img class='sprite' id='sprite" + id + "' " +
+            "style='background:url(" + imgSrc(image, id) + ") 0 -465px'>";
         $("#data").append(imgTag);
     }
 
@@ -106,6 +106,9 @@
         if (i + 1 === images.length) {
             changeSpeed();
             loaded()
+        } else if (i == 0) {
+            var img = document.getElementById("img1000");
+            canvas.drawImage(img, 0, 0);
         }
     }
 
