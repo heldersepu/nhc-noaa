@@ -1,26 +1,30 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Web.Http;
-using System.Web.Http.Cors;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace nhc_noaa.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class ImagesController : BaseController
     {
         [HttpGet]
-        public List<string> EastAtlantic(int count = 20)
+        public IEnumerable<string> EastAtlantic(int count = 20, DateTime? min = null, DateTime? max = null)
         {
-            return readDir(east_atl_path, count);
+            return DirInfo.GetLatestFiles(count)
+                .Where(x => (
+                        (x.CreationTime > (min ?? DateTime.MinValue)) &&
+                        (x.CreationTime < (max ?? DateTime.MaxValue)))
+                    )
+                .Select(x => x.Name);
         }
 
-        static private List<string> readDir(string path, int count)
+        private DirectoryInfo DirInfo
         {
-            var result = new List<string>();
-            var dinfo = new DirectoryInfo(baseDir(path));
-            foreach (var file in dinfo.GetLatestFiles(count))
-                result.Add(file.Name);
-            return result;
+            get
+            {
+                return new DirectoryInfo(baseDir(east_atl_path));
+            }
         }
     }
 }

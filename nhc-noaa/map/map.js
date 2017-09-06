@@ -21,7 +21,7 @@
         } else {
             $("#loader").fadeOut("slow");
             $("#controls input").prop("disabled", false);
-        }        
+        }
     }
 
     function changeCount() {
