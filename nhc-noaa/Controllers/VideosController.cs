@@ -13,6 +13,7 @@ namespace nhc_noaa.Controllers
         private static Logger logger = LogManager.GetCurrentClassLogger();
 
         [HttpGet]
+        [KeyAuthorize]
         public dynamic EastAtlantic(int count = 20, bool isCompressed = true)
         {
             DateTime sTime = DateTime.Now;
