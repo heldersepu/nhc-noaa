@@ -11,14 +11,14 @@
     }
 
     function loaded() {
-        var loadedImages = 0;
+        var notCached = 0;
         for (var i = 0; i < images.length; i++) {
-            if (isCached(images[i], i))
-                loadedImages++;
-            if (loadedImages > 1)
+            if (!isCached(images[i], i))
+                notCached++;
+            if (notCached > 1)
                 break;
         }
-        if (loadedImages > 0) {
+        if (notCached > 0) {
             setTimeout(loaded, 2000);
         } else {
             $("#loader").fadeOut("slow");
