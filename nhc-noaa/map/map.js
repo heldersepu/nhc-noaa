@@ -15,9 +15,11 @@
         for (var i = 0; i < images.length; i++) {
             if (isCached(images[i], i))
                 loadedImages++;
+            if (loadedImages > 1)
+                break;
         }
-        if (loadedImages !== images.length) {
-            setTimeout(loaded, 500);
+        if (loadedImages > 0) {
+            setTimeout(loaded, 2000);
         } else {
             $("#loader").fadeOut("slow");
             $("#controls input").prop("disabled", false);
@@ -167,10 +169,10 @@
 
 $(window).load(function () {
     var hash = window.location.hash.replace("#", "");
-	if ($.isNumeric(hash)) $("#count").val(hash);
-	$("#back").click(function () { Map.changePos(-1); });
-	$("#forw").click(function () { Map.changePos(1); });
-	$("#speed").change(Map.changeSpeed);
-	$("#count").change(Map.changeCount);
+    if ($.isNumeric(hash)) $("#count").val(hash);
+    $("#back").click(function () { Map.changePos(-1); });
+    $("#forw").click(function () { Map.changePos(1); });
+    $("#speed").change(Map.changeSpeed);
+    $("#count").change(Map.changeCount);
     Map.init();
 });
