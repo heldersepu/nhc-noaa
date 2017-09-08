@@ -14,7 +14,7 @@ namespace nhc_noaa.Controllers
 
         [HttpGet]
         [KeyAuthorize]
-        public dynamic EastAtlantic(int count = 20, bool isCompressed = true)
+        public dynamic EastAtlantic(int count = 20, double frameRate = 25, bool isCompressed = true)
         {
             DateTime sTime = DateTime.Now;
             string fileName = baseDir("videos\\");
@@ -25,7 +25,7 @@ namespace nhc_noaa.Controllers
                 fileName += files[0].Name.Replace(".jpg", "") + "_" + files[files.Length - 1].Name.Replace(".jpg", "") + ".avi";
                 if (!File.Exists(fileName))
                 {
-                    CreateVideo(fileName, files, isCompressed);
+                    CreateVideo(fileName, files, frameRate, isCompressed);
                 }
             }
             return Json(new
@@ -46,13 +46,13 @@ namespace nhc_noaa.Controllers
             };
         }
 
-        private void CreateVideo(string fileName, FileInfo[] files, bool isCompressed)
+        private void CreateVideo(string fileName, FileInfo[] files, double frameRate, bool isCompressed)
         {
             try
             {
                 var bmp = new Bitmap(1120, 480, PixelFormat.Format24bppRgb);
                 var aviManager = new AviManager(fileName, false);
-                var aviStream = aviManager.AddVideoStream(isCompressed, 25, bmp);
+                var aviStream = aviManager.AddVideoStream(isCompressed, frameRate,  bmp);
                 foreach (var file in files)
                 {
                     bmp = (Bitmap)Bitmap.FromFile(file.FullName);
