@@ -8,12 +8,12 @@ namespace nhc_noaa.Controllers
 {
     public abstract class BaseController : ApiController
     {
-        protected string domain { get { return ConfigurationManager.AppSettings["DOMAIN"]; } }
-        protected string year { get { return DateTime.Now.Year.ToString(); } }
-        protected string east_atl_path { get { return ConfigurationManager.AppSettings["EAST_ATL"]; } }
-        protected string images { get { return @">" + year + ".*rb.jpg"; } }
+        protected string Domain { get { return ConfigurationManager.AppSettings["DOMAIN"]; } }
+        protected string Year { get { return DateTime.Now.Year.ToString(); } }
+        protected string EastAtlPath { get { return ConfigurationManager.AppSettings["EAST_ATL"]; } }
+        protected string Images { get { return @">" + Year + ".*rb.jpg"; } }
 
-        static protected string baseDir(string path)
+        static protected string BaseDir(string path)
         {
             string fld = AppDomain.CurrentDomain.BaseDirectory;
             fld += path.Trim('/').Replace("/", "_");
@@ -26,7 +26,7 @@ namespace nhc_noaa.Controllers
         {
             get
             {
-                return new DirectoryInfo(baseDir(east_atl_path));
+                return new DirectoryInfo(BaseDir(EastAtlPath));
             }
         }
     }

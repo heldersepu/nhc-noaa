@@ -17,12 +17,12 @@ namespace nhc_noaa.Controllers
         {
             DateTime sTime = DateTime.Now;
             dynamic obj = new ExpandoObject();
-            obj.Images = await download(domain, east_atl_path, images);
+            obj.Images = await Download(Domain, EastAtlPath, Images);
             obj.Time = sTime.Diff();
             return Json(obj);
         }
 
-        static private async Task<Images> download(string domain, string path, string pattern)
+        static private async Task<Images> Download(string domain, string path, string pattern)
         {
             var result = new Images();
             var client = new RestClient(domain);
@@ -33,7 +33,7 @@ namespace nhc_noaa.Controllers
             {
                 string fileName = match.Captures[0].Value.Replace(">", "");
                 result.Add(fileName, 0);
-                if (!File.Exists(baseDir(path) + "\\" + fileName))
+                if (!File.Exists(BaseDir(path) + "\\" + fileName))
                 {
                     var img = new RestRequest(path + fileName, Method.GET);
                     img.AddParameter("fileName", fileName);
@@ -48,7 +48,7 @@ namespace nhc_noaa.Controllers
                 result[fileName] = (int)response.StatusCode;
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
-                    var fs = File.Create(baseDir(path) + "\\" + fileName);
+                    var fs = File.Create(BaseDir(path) + "\\" + fileName);
                     await fs.WriteAsync(response.RawBytes, 0, response.RawBytes.Length);
                     fs.Close();
                 }

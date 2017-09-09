@@ -17,7 +17,7 @@ namespace nhc_noaa.Controllers
         public dynamic EastAtlantic(int count = 20, DateTime? min = null, DateTime? max = null, double frameRate = 25, bool isCompressed = true)
         {
             DateTime sTime = DateTime.Now;
-            string fileName = baseDir("videos\\");
+            string fileName = BaseDir("videos\\");
             var files = DirInfo.GetLatestFiles(count, min, max);
             if (files.Length > 1)
             {
