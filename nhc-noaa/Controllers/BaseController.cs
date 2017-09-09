@@ -3,7 +3,6 @@ using System.IO;
 using System.Web.Http;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
 
 namespace nhc_noaa.Controllers
 {
@@ -29,31 +28,6 @@ namespace nhc_noaa.Controllers
             {
                 return new DirectoryInfo(baseDir(east_atl_path));
             }
-        }
-    }
-
-    public static class DateTimeExtension
-    {
-        public static double Diff(this DateTime value)
-        {
-            return Math.Round((DateTime.Now - value).TotalMilliseconds);
-        }
-    }
-
-    public static class DirectoryInfoExtension
-    {
-        public static FileInfo[] GetLatestFiles(this DirectoryInfo value, int count)
-        {
-            return value.GetFiles().OrderByDescending(p => p.CreationTime).Take(count).ToArray();
-        }
-
-        public static FileInfo[] GetLatestFiles(this DirectoryInfo value, int count, DateTime? min, DateTime? max)
-        {
-            return value.GetLatestFiles(count)
-                 .Where(x => (
-                        (x.CreationTime > (min ?? DateTime.MinValue)) &&
-                        (x.CreationTime < (max ?? DateTime.MaxValue)))
-                    ).ToArray();
         }
     }
 
