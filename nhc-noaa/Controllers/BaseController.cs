@@ -22,6 +22,14 @@ namespace nhc_noaa.Controllers
                 Directory.CreateDirectory(fld);
             return fld;
         }
+
+        protected DirectoryInfo DirInfo
+        {
+            get
+            {
+                return new DirectoryInfo(baseDir(east_atl_path));
+            }
+        }
     }
 
     public static class DateTimeExtension

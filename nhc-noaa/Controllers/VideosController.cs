@@ -18,8 +18,7 @@ namespace nhc_noaa.Controllers
         {
             DateTime sTime = DateTime.Now;
             string fileName = baseDir("videos\\");
-            var dinfo = new DirectoryInfo(baseDir(east_atl_path));
-            var files = dinfo.GetLatestFiles(count);
+            var files = DirInfo.GetLatestFiles(count);
             if (files.Length > 1)
             {
                 fileName += files[0].Name.Replace(".jpg", "") + "_" + files[files.Length - 1].Name.Replace(".jpg", "") + ".avi";

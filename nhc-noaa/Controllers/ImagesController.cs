@@ -1,5 +1,4 @@
 ﻿using System;
-using System.IO;
 using System.Web.Http;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +11,6 @@ namespace nhc_noaa.Controllers
         public IEnumerable<string> EastAtlantic(int count = 20, DateTime? min = null, DateTime? max = null)
         {
             return DirInfo.GetLatestFiles(count, min, max).Select(x => x.Name);
-        }
-
-        private DirectoryInfo DirInfo
-        {
-            get
-            {
-                return new DirectoryInfo(baseDir(east_atl_path));
-            }
         }
     }
 }
