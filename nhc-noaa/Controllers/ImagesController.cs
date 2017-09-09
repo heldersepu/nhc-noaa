@@ -11,12 +11,7 @@ namespace nhc_noaa.Controllers
         [HttpGet]
         public IEnumerable<string> EastAtlantic(int count = 20, DateTime? min = null, DateTime? max = null)
         {
-            return DirInfo.GetLatestFiles(count)
-                .Where(x => (
-                        (x.CreationTime > (min ?? DateTime.MinValue)) &&
-                        (x.CreationTime < (max ?? DateTime.MaxValue)))
-                    )
-                .Select(x => x.Name);
+            return DirInfo.GetLatestFiles(count, min, max).Select(x => x.Name);
         }
 
         private DirectoryInfo DirInfo
