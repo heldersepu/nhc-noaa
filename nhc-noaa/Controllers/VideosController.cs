@@ -14,11 +14,11 @@ namespace nhc_noaa.Controllers
 
         [HttpGet]
         [KeyAuthorize]
-        public dynamic EastAtlantic(int count = 20, double frameRate = 25, bool isCompressed = true)
+        public dynamic EastAtlantic(int count = 20, DateTime? min = null, DateTime? max = null, double frameRate = 25, bool isCompressed = true)
         {
             DateTime sTime = DateTime.Now;
             string fileName = baseDir("videos\\");
-            var files = DirInfo.GetLatestFiles(count);
+            var files = DirInfo.GetLatestFiles(count, min, max);
             if (files.Length > 1)
             {
                 fileName += files[0].Name.Replace(".jpg", "") + "_" + files[files.Length - 1].Name.Replace(".jpg", "") + ".avi";
