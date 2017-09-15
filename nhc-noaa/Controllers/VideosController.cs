@@ -14,7 +14,7 @@ namespace nhc_noaa.Controllers
 
         [HttpGet]
         [KeyAuthorize]
-        public dynamic EastAtlantic(int count = 20, DateTime? min = null, DateTime? max = null, double frameRate = 25, bool isCompressed = true)
+        public dynamic EastAtlantic(int count = 20, DateTime? min = null, DateTime? max = null, double frameRate = 25, bool isCompressed = false)
         {
             DateTime sTime = DateTime.Now;
             string fileName = BaseDir("videos\\");
