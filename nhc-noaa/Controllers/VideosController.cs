@@ -4,6 +4,7 @@ using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
+using System.Linq;
 using System.Web.Http;
 
 namespace nhc_noaa.Controllers
@@ -21,7 +22,8 @@ namespace nhc_noaa.Controllers
             var files = DirInfo.GetLatestFiles(count, min, max);
             if (files.Length > 1)
             {
-                fileName += files[0].Name.Replace(".jpg", "") + "_" + files[files.Length - 1].Name.Replace(".jpg", "") + ".avi";
+                files = files.OrderBy(p => p.CreationTime).ToArray();
+                fileName += files.FirstAndLast(".jpg", "") + ".avi";
                 if (!File.Exists(fileName))
                 {
                     CreateVideo(fileName, files, frameRate, isCompressed);

@@ -122,6 +122,7 @@
     <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\VideosController.cs" />
     <Compile Include="Extensions\DateTimeExtension.cs" />
+    <Compile Include="Extensions\FileInfoExtension.cs" />
     <Compile Include="Extensions\DirectoryInfoExtension.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
