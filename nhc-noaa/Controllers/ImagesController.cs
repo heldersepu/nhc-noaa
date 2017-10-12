@@ -10,7 +10,7 @@ namespace nhc_noaa.Controllers
         [HttpGet]
         public IEnumerable<string> EastAtlantic(int count = 20, DateTime? min = null, DateTime? max = null)
         {
-            return DirInfo.GetLatestFiles(count, min, max).Select(x => x.Name);
+            return DirInfo.GetLatestFiles(count, min, max).OrderByDescending(x => x.Name).Select(x => x.Name);
         }
     }
 }
