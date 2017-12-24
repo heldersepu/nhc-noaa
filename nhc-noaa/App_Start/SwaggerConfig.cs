@@ -337,7 +337,7 @@ namespace nhc_noaa
                 {
                     switch (schema.ToString())
                     {
-                        case "min":                           
+                        case "min":
                         case "max":
                             schema.example = DateTime.Now;
                             break;
