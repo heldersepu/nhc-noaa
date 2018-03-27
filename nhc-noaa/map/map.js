@@ -42,7 +42,7 @@
         loading();
         $.ajax({
             type: "GET",
-            url: cdn + "/api/Images/EastAtlantic?count=" + intCount,
+            url: "/api/Images/EastAtlantic?count=" + intCount,
             cache: false,
             success: successFunc,
             error: errorFunc
