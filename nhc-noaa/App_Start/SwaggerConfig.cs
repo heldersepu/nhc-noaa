@@ -73,6 +73,8 @@ namespace nhc_noaa
                         //    .Description("Basic HTTP Authentication");
                         //
                         c.ApiKey("apiKey", "header", "API Key Authentication", typeof(KeyAuthorizeAttribute));
+                        c.ApiKey("appId", "header", "APP ID Authentication", typeof(KeyAuthorizeAttribute));
+
                         //
                         //c.OAuth2("oauth2")
                         //    .Description("OAuth2 Implicit Grant")
