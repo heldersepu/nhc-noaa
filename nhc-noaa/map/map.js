@@ -50,7 +50,7 @@
     }
 
     function imgSrc(image, id) {
-        return cdn.replace("0", (id%10)) + "/goes_east_tatl_img/" + image;
+        return cdn.replace("0", (id%10)) + "/GOES16_ABI_SECTOR_taw_GEOCOLOR/" + image;
     }
 
     function sprite(image, id) {
