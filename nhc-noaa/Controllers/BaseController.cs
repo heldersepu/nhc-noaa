@@ -11,7 +11,7 @@ namespace nhc_noaa.Controllers
         protected string Domain { get { return ConfigurationManager.AppSettings["DOMAIN"]; } }
         protected string Year { get { return DateTime.Now.Year.ToString(); } }
         protected string EastAtlPath { get { return ConfigurationManager.AppSettings["EAST_ATL"]; } }
-        protected string Images { get { return @">" + Year + ".*rb.jpg"; } }
+        protected string Images { get { return @">" + Year + ".*1800x1080.jpg"; } }
 
         static protected string BaseDir(string path)
         {
