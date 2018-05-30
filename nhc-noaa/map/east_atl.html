@@ -8,16 +8,18 @@
 	<img src="page-loader.gif" id="loader" >
 	<canvas id="map" width="1120" height="480" ></canvas>
 
-	<div id="controls">
-		<input title="Step back" type="button" id="back" value="<<">
-		<input title="Animation speed" type="range" id="speed" value="100" min="10" max="500">
-		<input title="Step forward" type="button" id="forw" value=">>">
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		<input title="Amount of images" type="text" id="count" value="100">
+	<div id="actions">
+		<div id="controls">
+			<input title="Step back" type="button" id="back" value="<<">
+			<input title="Animation speed" type="range" id="speed" value="100" min="10" max="500">
+			<input title="Step forward" type="button" id="forw" value=">>">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			<input title="Amount of images" type="text" id="count" value="100">
+		</div>
+	  <div id="images"></div>
+		<div id="data"></div>
 	</div>
-  <div id="images"></div>
-	<div id="data"></div>
 </div>
 
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>

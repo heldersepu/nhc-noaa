@@ -32,8 +32,8 @@ input {width: 40px;}
 	left: 500px;
 }
 .active {
-    border-radius: 50%;
-    background: red;
+	border-radius: 50%;
+	background: red;
 }
 .sprite {
 	height: 15px;
