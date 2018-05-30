@@ -7,11 +7,11 @@ function resizeCanvas() {
 function keyShortcuts(e) {
     // Hide the action pane
     if (e.charCode == 104 || e.charCode == 72) {
-        $("#action").hide("slow");
+        $("#actions").hide("slow");
     }
     // Show the action pane
     if (e.charCode == 115 || e.charCode == 83) {
-        $("#action").show("slow");
+        $("#actions").show("slow");
     }
     // Change speed of the map with the + and -
     if (e.charCode == 43 || e.charCode == 45) {
