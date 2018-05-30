@@ -19,7 +19,8 @@ div {padding: 10px;max-width: 1400px;}
 input {width: 40px;}
 #actions {
 	z-index: 1;
-  width: 95%;
+	width: 95%;
+	bottom: 10px;
 	position: absolute;
 	background: rgba(255, 255, 255, 0.6)
 }

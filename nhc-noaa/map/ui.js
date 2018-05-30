@@ -5,13 +5,13 @@ function resizeCanvas() {
 }
 
 function keyShortcuts(e) {
-    // Hide the action pane
+    // Hide the actions pane
     if (e.charCode == 104 || e.charCode == 72) {
-        $("#actions").hide("slow");
+        $("#actions").hide();
     }
-    // Show the action pane
+    // Show the actions pane
     if (e.charCode == 115 || e.charCode == 83) {
-        $("#actions").show("slow");
+        $("#actions").show();
     }
     // Change speed of the map with the + and -
     if (e.charCode == 43 || e.charCode == 45) {
