@@ -17,6 +17,7 @@ canvas {
 }
 div {padding: 10px;max-width: 1400px;}
 input {width: 40px;}
+#actions {z-index: 1; position: absolute;}
 #count {text-align: center;}
 #speed {width: 900px;position:relative;top:6px;}
 #images {width: 1000px; padding: 50px}
@@ -27,6 +28,7 @@ input {width: 40px;}
 	padding-left: 1px;
 }
 #loader {
+	z-index: 1; 
 	position: absolute;
 	top: 160px;
 	left: 500px;
