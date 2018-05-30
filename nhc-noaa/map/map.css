@@ -17,7 +17,12 @@ canvas {
 }
 div {padding: 10px;max-width: 1400px;}
 input {width: 40px;}
-#actions {z-index: 1; position: absolute;}
+#actions {
+	z-index: 1;
+  width: 95%; 
+	position: absolute;
+	background: rgba(255, 255, 255, 0.6)
+}
 #count {text-align: center;}
 #speed {width: 900px;position:relative;top:6px;}
 #images {width: 1000px; padding: 50px}
