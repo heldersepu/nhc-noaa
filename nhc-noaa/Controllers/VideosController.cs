@@ -51,9 +51,9 @@ namespace nhc_noaa.Controllers
         {
             try
             {
-                var bmp = new Bitmap(1120, 480, PixelFormat.Format24bppRgb);
+                var bmp = new Bitmap(1800, 1080, PixelFormat.Format24bppRgb);
                 var aviManager = new AviManager(fileName, false);
-                var aviStream = aviManager.AddVideoStream(isCompressed, frameRate,  bmp);
+                var aviStream = aviManager.AddVideoStream(isCompressed, frameRate, bmp);
                 foreach (var file in files)
                 {
                     bmp = (Bitmap)Bitmap.FromFile(file.FullName);
