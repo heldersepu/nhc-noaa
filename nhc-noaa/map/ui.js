@@ -4,14 +4,24 @@ function resizeCanvas() {
     htmlCanvas.height = window.innerHeight;
 }
 
+function hideActions() {
+    $("#actions").children().hide();
+    $("#actions").animate({width: '40px', height: '40px', 'border-radius': '25px' });
+}
+
+function showActions() {
+    $("#actions").animate({width: '95%', height: '200px', 'border-radius': '0px' });
+    $("#actions").children().show();
+}
+
 function keyShortcuts(e) {
     // Hide the actions pane
     if (e.charCode == 104 || e.charCode == 72) {
-        $("#actions").hide();
+        hideActions();
     }
     // Show the actions pane
     if (e.charCode == 115 || e.charCode == 83) {
-        $("#actions").show();
+        showActions();
     }
     // Change speed of the map with the + and -
     if (e.charCode == 43 || e.charCode == 45) {
