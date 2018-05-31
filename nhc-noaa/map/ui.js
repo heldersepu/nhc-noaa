@@ -14,6 +14,18 @@ function showActions() {
     $("#actions").children().show();
 }
 
+function timeoutActions() {
+    if ($("#loader").css('display') == 'none') {
+        hideActions();
+    }
+}
+
+function actionsClick() {
+    if ($("#controls").css('display') == 'none') {
+        showActions();
+    }
+}
+
 function keyShortcuts(e) {
     // Hide the actions pane
     if (e.charCode == 104 || e.charCode == 72) {
@@ -36,9 +48,11 @@ $(window).load(function () {
     window.addEventListener('resize', resizeCanvas, false);
     $(document).keypress(keyShortcuts);
 
+    setTimeout(timeoutActions, 2000);
     var hash = window.location.hash.replace("#", "");
     if ($.isNumeric(hash)) $("#count").val(hash);
 
+    $("#actions").click(actionsClick)
     $("#back").click(function () { Map.changePos(-1); });
     $("#forw").click(function () { Map.changePos(1); });
     $("#speed").change(Map.changeSpeed);
