@@ -55,7 +55,7 @@
 
     function sprite(image, id) {
         var imgTag = "<img class='sprite' id='sprite" + id + "' " +
-            "style='background:url(" + imgSrc(image, id) + ") -560px -1055px'><br />";
+            "style='background:url(" + imgSrc(image, id) + ") -560px -1052px'><br />";
         $("#data").append(imgTag);
     }
 
