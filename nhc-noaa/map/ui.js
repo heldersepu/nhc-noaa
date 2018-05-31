@@ -17,6 +17,8 @@ function showActions() {
 function timeoutActions() {
     if ($("#loader").css('display') == 'none') {
         hideActions();
+    } else {
+        setTimeout(timeoutActions, 2000);
     }
 }
 
