@@ -22,7 +22,7 @@ namespace nhc_noaa.Controllers
             var files = DirInfo.GetLatestFiles(count, min, max);
             if (files.Length > 1)
             {
-                files = files.OrderBy(p => p.CreationTime).ToArray();
+                files = files.OrderBy(p => p.Name).ToArray();
                 fileName += files.FirstAndLast(".jpg", "") + ".avi";
                 if (!File.Exists(fileName))
                 {
