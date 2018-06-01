@@ -1,5 +1,8 @@
+var map;
+var activityTimeout;
+var htmlCanvas = document.getElementById('map');
+
 function resizeCanvas() {
-    var htmlCanvas = document.getElementById('map')
     htmlCanvas.width = window.innerWidth;
     htmlCanvas.height = window.innerHeight;
 }
@@ -18,8 +21,13 @@ function timeoutActions() {
     if ($("#loader").css('display') == 'none') {
         hideActions();
     } else {
-        setTimeout(timeoutActions, 2000);
+        startTimeout();
     }
+}
+
+function startTimeout() {
+    clearTimeout(activityTimeout);
+    activityTimeout = setTimeout(timeoutActions, 3000);
 }
 
 function actionsClick() {
@@ -45,19 +53,40 @@ function keyShortcuts(e) {
     }
 }
 
+function moveBack() {
+    startTimeout();
+    map.changePos(-1);
+}
+
+function moveForw() {
+    startTimeout();
+    map.changePos(1);
+}
+
+function changeSpeed() {
+    startTimeout();
+    map.changeSpeed();
+}
+
+function changeCount() {
+    startTimeout();
+    map.changeCount();
+}
+
 $(window).load(function () {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas, false);
-    $(document).keypress(keyShortcuts);
 
-    setTimeout(timeoutActions, 2000);
     var hash = window.location.hash.replace("#", "");
     if ($.isNumeric(hash)) $("#count").val(hash);
 
     $("#actions").click(actionsClick)
-    $("#back").click(function () { Map.changePos(-1); });
-    $("#forw").click(function () { Map.changePos(1); });
-    $("#speed").change(Map.changeSpeed);
-    $("#count").change(Map.changeCount);
-    Map.init();
+    $("#back").click(moveBack);
+    $("#forw").click(moveForw);
+    $("#speed").change(changeSpeed);
+    $("#count").change(changeCount);
+    $(document).keypress(keyShortcuts);
+
+    map = new Map(htmlCanvas);
+    startTimeout();
 });

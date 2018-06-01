@@ -1,9 +1,11 @@
-﻿var Map = (function () {
-    var canvas;
-    var interval;
+function Map(htmlCanvas) {
+
+    var canvas = htmlCanvas.getContext("2d");
+    var interval = setInterval(changeImage, 100);
     var count = 0;
     var images = [];
     var cdn = "http://nhc0.azureedge.net";
+    changeCount();
 
     function loading() {
         $("#loader").show();
@@ -150,18 +152,10 @@
         interval = setInterval(changeImage, $("#speed").val());
     }
 
-    function init() {
-        var c = document.getElementById("map");
-        canvas = c.getContext("2d");
-        interval = setInterval(changeImage, 100);
-        changeCount();
-    }
-
     return {
         changeCount: changeCount,
         changeSpeed: changeSpeed,
         changePos: changePos,
-        setImage: setImage,
-        init: init
+        setImage: setImage
     };
-})();
+}
