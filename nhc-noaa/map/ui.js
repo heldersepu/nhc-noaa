@@ -87,6 +87,7 @@ $(window).load(function () {
     $("#forw").click(moveForw);
     $("#speed").change(changeSpeed);
     $("#count").change(changeCount);
+    $("#count").keypress(startTimeout);
     $(document).keypress(keyShortcuts);
 
     map = new Map(htmlCanvas);
