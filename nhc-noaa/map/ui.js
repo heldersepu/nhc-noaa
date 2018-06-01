@@ -22,6 +22,7 @@ function timeoutActions() {
     if ($("#loader").css('display') == 'none') {
         hideActions();
     } else {
+        $("#images").children().click(imageClick);
         startTimeout();
     }
 }
@@ -76,9 +77,10 @@ function changeCount() {
     map.changeCount();
 }
 
-function imageClick(x, y) {
+function imageClick(e) {
     startTimeout();
-    map.setImage(0);
+    var i = e.target.id.replace("img", "") - 1000;
+    map.setImage(i);
 }
 
 $(window).load(function () {
@@ -88,7 +90,6 @@ $(window).load(function () {
     var hash = window.location.hash.replace("#", "");
     if ($.isNumeric(hash)) $("#count").val(hash);
 
-    $("#images").children().click(imageClick);
     $("#actions").click(actionsClick);
     $("#back").click(moveBack);
     $("#forw").click(moveForw);
