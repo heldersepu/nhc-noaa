@@ -44,7 +44,7 @@ function keyShortcuts(e) {
         hideActions();
     }
     // Show the actions pane
-    if (e.charCode == 115 || e.charCode == 83) {        
+    if (e.charCode == 115 || e.charCode == 83) {
         showActions();
         clearTimeout(activityTimeout);
     }
@@ -76,6 +76,11 @@ function changeCount() {
     map.changeCount();
 }
 
+function imageClick(x, y) {
+    startTimeout();
+    map.setImage(0);
+}
+
 $(window).load(function () {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas, false);
@@ -83,7 +88,8 @@ $(window).load(function () {
     var hash = window.location.hash.replace("#", "");
     if ($.isNumeric(hash)) $("#count").val(hash);
 
-    $("#actions").click(actionsClick)
+    $("#images").children().click(imageClick);
+    $("#actions").click(actionsClick);
     $("#back").click(moveBack);
     $("#forw").click(moveForw);
     $("#speed").change(changeSpeed);
