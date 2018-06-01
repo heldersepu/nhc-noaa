@@ -15,6 +15,7 @@ function hideActions() {
 function showActions() {
     $("#actions").animate({width: '95%', height: '200px', 'border-radius': '0px' });
     $("#actions").children().show();
+    startTimeout(9000);
 }
 
 function timeoutActions() {
@@ -25,9 +26,10 @@ function timeoutActions() {
     }
 }
 
-function startTimeout() {
+function startTimeout(miliSecs) {
+    miliSecs = miliSecs || 3000;
     clearTimeout(activityTimeout);
-    activityTimeout = setTimeout(timeoutActions, 3000);
+    activityTimeout = setTimeout(timeoutActions, miliSecs);
 }
 
 function actionsClick() {
