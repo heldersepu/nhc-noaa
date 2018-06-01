@@ -44,8 +44,9 @@ function keyShortcuts(e) {
         hideActions();
     }
     // Show the actions pane
-    if (e.charCode == 115 || e.charCode == 83) {
+    if (e.charCode == 115 || e.charCode == 83) {        
         showActions();
+        clearTimeout(activityTimeout);
     }
     // Change speed of the map with the + and -
     if (e.charCode == 43 || e.charCode == 45) {
