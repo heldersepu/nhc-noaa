@@ -108,7 +108,7 @@ function Map(htmlCanvas) {
     }
 
     function appendImage(i) {
-        var imageTag = "<img id='img" + (i + 1000) + "' onclick='Map.setImage(" + i + ")'>";
+        var imageTag = "<img id='img" + (i + 1000) + "' onclick='map.setImage(" + i + ")'>";
         $("#images").append(imageTag);
     }
 
