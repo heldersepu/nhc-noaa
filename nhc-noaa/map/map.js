@@ -61,11 +61,16 @@ function Map(htmlCanvas) {
         $("#data").append(imgTag);
     }
 
+    function stopImageLoop() {
+        clearInterval(interval);
+        interval = false;
+    }
+
     function successFunc(data) {
         images = data;
         images.reverse();
         $("#data").empty();
-        clearInterval(interval);
+        stopImageLoop();
         sprite(images[0], 0);
         sprite(images[images.length - 1], images.length - 1);
         addAllImages();
@@ -81,7 +86,7 @@ function Map(htmlCanvas) {
 
     function changePos(pos) {
         count += pos;
-        clearInterval(interval);
+        stopImageLoop();
         showImage();
     }
 
@@ -102,7 +107,7 @@ function Map(htmlCanvas) {
     }
 
     function setImage(x) {
-        clearInterval(interval);
+        stopImageLoop();
         count = x;
         showImage();
     }
@@ -148,11 +153,19 @@ function Map(htmlCanvas) {
     }
 
     function changeSpeed() {
-        clearInterval(interval);
+        stopImageLoop();
         interval = setInterval(changeImage, $("#speed").val());
     }
 
+    function togglePause() {
+        if (interval)
+            stopImageLoop();
+        else
+            interval = setInterval(changeImage, $("#speed").val());
+    }
+
     return {
+        togglePause: togglePause,
         changeCount: changeCount,
         changeSpeed: changeSpeed,
         changePos: changePos,

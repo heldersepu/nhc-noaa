@@ -40,6 +40,10 @@ function actionsClick() {
 }
 
 function keyShortcuts(e) {
+    // Pause/Restart the map
+    if (e.charCode === 32) {
+        map.togglePause();
+    }
     // Hide the actions pane
     if (e.charCode === 104 || e.charCode === 72) {
         hideActions();
