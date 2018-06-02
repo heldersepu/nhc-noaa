@@ -28,7 +28,7 @@ function timeoutActions() {
 }
 
 function startTimeout(miliSecs) {
-    miliSecs = miliSecs || 3000;
+    if (!$.isNumeric(miliSecs)) miliSecs = 3000;
     clearTimeout(activityTimeout);
     activityTimeout = setTimeout(timeoutActions, miliSecs);
 }
