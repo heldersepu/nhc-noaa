@@ -22,7 +22,8 @@ input {width: 40px;}
 	width: 95%;
 	bottom: 10px;
 	position: absolute;
-	background: rgba(255, 255, 255, 0.6)
+	background: rgba(255, 255, 255, 0.6);
+	overflow: hidden;
 }
 #count {text-align: center;}
 #speed {width: 900px;position:relative;top:6px;}
