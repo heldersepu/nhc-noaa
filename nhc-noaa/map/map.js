@@ -52,7 +52,7 @@ function Map(htmlCanvas) {
     }
 
     function imgSrc(image, id) {
-        return cdn.replace("0", (id%10)) + "/GOES16_ABI_SECTOR_taw_GEOCOLOR/" + image;
+        return cdn.replace("0", id%10) + "/GOES16_ABI_SECTOR_taw_GEOCOLOR/" + image;
     }
 
     function sprite(image, id) {
@@ -140,8 +140,8 @@ function Map(htmlCanvas) {
         $("#images").empty();
         for (var i = 0; i < images.length; i++) {
             appendImage(i);
-            var delay = i * 25;
-            if (($.inArray(images[i], imgs) > 0) || (isCached(images[i], i)))
+            var delay = i * 100;
+            if ($.inArray(images[i], imgs) > 0 || isCached(images[i], i))
                 delay = i * 8;
             setTimeout(updateImage.bind(null, i), delay);
         }

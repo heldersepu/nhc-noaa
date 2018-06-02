@@ -19,7 +19,7 @@ function showActions() {
 }
 
 function timeoutActions() {
-    if ($("#loader").css('display') == 'none') {
+    if ($("#loader").css('display') === 'none') {
         hideActions();
     } else {
         $("#images").children().click(imageClick);
@@ -34,26 +34,26 @@ function startTimeout(miliSecs) {
 }
 
 function actionsClick() {
-    if ($("#controls").css('display') == 'none') {
+    if ($("#controls").css('display') === 'none') {
         showActions();
     }
 }
 
 function keyShortcuts(e) {
     // Hide the actions pane
-    if (e.charCode == 104 || e.charCode == 72) {
+    if (e.charCode === 104 || e.charCode === 72) {
         hideActions();
     }
     // Show the actions pane
-    if (e.charCode == 115 || e.charCode == 83) {
+    if (e.charCode === 115 || e.charCode === 83) {
         showActions();
         clearTimeout(activityTimeout);
     }
     // Change speed of the map with the + and -
-    if (e.charCode == 43 || e.charCode == 45) {
-        var x = (e.charCode == 43) ? 2 : -2;
-        $("#speed").val(parseInt($("#speed").val()) + x)
-        $("#speed").change()
+    if (e.charCode === 43 || e.charCode === 45) {
+        var x = e.charCode === 43 ? 2 : -2;
+        $("#speed").val(parseInt($("#speed").val()) + x);
+        $("#speed").change();
     }
 }
 
