@@ -6,6 +6,11 @@ namespace nhc_noaa
 {
     public static class DirectoryInfoExtension
     {
+        public static FileInfo[] GetOldestFiles(this DirectoryInfo value, int count)
+        {
+            return value.GetFiles().OrderBy(p => p.CreationTime).Take(count).ToArray();
+        }
+
         public static FileInfo[] GetLatestFiles(this DirectoryInfo value, int count)
         {
             return value.GetFiles().OrderByDescending(p => p.CreationTime).Take(count).ToArray();
