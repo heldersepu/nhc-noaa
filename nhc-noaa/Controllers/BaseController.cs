@@ -8,6 +8,7 @@ namespace nhc_noaa.Controllers
 {
     public abstract class BaseController : ApiController
     {
+        protected string ConnectionString { get { return ConfigurationManager.AppSettings["StorageConnectionString"]; } }
         protected string Domain { get { return ConfigurationManager.AppSettings["DOMAIN"]; } }
         protected string Year { get { return DateTime.Now.Year.ToString(); } }
         protected string EastAtlPath { get { return ConfigurationManager.AppSettings["EAST_ATL"]; } }

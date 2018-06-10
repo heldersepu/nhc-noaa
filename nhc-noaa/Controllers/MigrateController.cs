@@ -1,15 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace nhc_noaa.Controllers
 {
     public class MigrateController : BaseController
     {
-        public IEnumerable<string> Get()
+        public async Task<IEnumerable<string>> Get()
         {
-            var files = DirInfo.GetOldestFiles(5).Select(x => x.FullName);
-            //TODO: move files to the Azure Storage
-            return files;
+            var files = DirInfo.GetOldestFiles(5);
+            var fileNames = files.Select(x => x.Name).ToArray();
+            foreach (var file in files)
+            {
+                await file.Upload(ConnectionString);
+            }
+            return fileNames;
         }
     }
 }
