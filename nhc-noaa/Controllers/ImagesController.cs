@@ -1,9 +1,8 @@
-﻿using System;
-using System.Web.Http;
+﻿using Microsoft.WindowsAzure.Storage.File;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.WindowsAzure.Storage;
-using Microsoft.WindowsAzure.Storage.File;
+using System.Web.Http;
 
 namespace nhc_noaa.Controllers
 {
@@ -17,12 +16,8 @@ namespace nhc_noaa.Controllers
 
         [HttpPost]
         public IEnumerable<string> ImageData(int count = 20, DateTime? min = null, DateTime? max = null)
-        {
-            var storageAccount = CloudStorageAccount.Parse(ConnectionString);
-            var fileClient = storageAccount.CreateCloudFileClient();
-            var share = fileClient.GetShareReference("images");
-            var dir = share.GetRootDirectoryReference();
-            var files = dir.ListFilesAndDirectories().OrderByDescending(x => ((CloudFile)x).Name).Take(count);
+        {            
+            var files = CloudDir.ListFilesAndDirectories().OrderByDescending(x => ((CloudFile)x).Name).Take(count);
             return files.Select(x => ((CloudFile)x).Name);
         }
     }

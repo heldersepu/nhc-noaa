@@ -1,12 +1,12 @@
 ﻿using RestSharp;
 using System;
+using System.Collections.Generic;
+using System.Dynamic;
 using System.IO;
 using System.Net;
-using System.Dynamic;
-using System.Web.Http;
-using System.Threading.Tasks;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Web.Http;
 
 namespace nhc_noaa.Controllers
 {

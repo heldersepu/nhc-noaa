@@ -3,6 +3,8 @@ using System.IO;
 using System.Web.Http;
 using System.Collections.Generic;
 using System.Configuration;
+using Microsoft.WindowsAzure.Storage;
+using Microsoft.WindowsAzure.Storage.File;
 
 namespace nhc_noaa.Controllers
 {
@@ -21,6 +23,17 @@ namespace nhc_noaa.Controllers
             if (!Directory.Exists(fld))
                 Directory.CreateDirectory(fld);
             return fld;
+        }
+
+        protected CloudFileDirectory CloudDir
+        {
+            get
+            {
+                var storageAccount = CloudStorageAccount.Parse(ConnectionString);
+                var fileClient = storageAccount.CreateCloudFileClient();
+                var share = fileClient.GetShareReference("images");
+                return share.GetRootDirectoryReference();
+            }
         }
 
         protected DirectoryInfo DirInfo
