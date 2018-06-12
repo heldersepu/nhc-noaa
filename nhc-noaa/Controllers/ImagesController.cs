@@ -16,7 +16,7 @@ namespace nhc_noaa.Controllers
 
         [HttpPost]
         public IEnumerable<string> ImageData(int count = 20, DateTime? min = null, DateTime? max = null)
-        {            
+        {
             var files = CloudDir.ListFilesAndDirectories().OrderByDescending(x => ((CloudFile)x).Name).Take(count);
             return files.Select(x => ((CloudFile)x).Name);
         }
