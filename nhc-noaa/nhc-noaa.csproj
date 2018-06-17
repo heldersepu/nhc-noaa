@@ -126,6 +126,7 @@
     <Compile Include="Controllers\ImageController.cs" />
     <Compile Include="Controllers\ImagesController.cs" />
     <Compile Include="Controllers\MigrateController.cs" />
+    <Compile Include="Controllers\StatsController.cs" />
     <Compile Include="Controllers\VideosController.cs" />
     <Compile Include="Extensions\DateTimeExtension.cs" />
     <Compile Include="Extensions\FileInfoExtension.cs" />
