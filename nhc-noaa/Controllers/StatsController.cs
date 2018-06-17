@@ -9,7 +9,7 @@ namespace nhc_noaa.Controllers
         {
             var images = new ImageStats();
             images.Local = DirInfo.GetFiles().Length;
-            images.Local = CloudDir.ListFilesAndDirectories().Count();
+            images.Cloud = CloudDir.ListFilesAndDirectories().Count();
             return images;
         }
     }
