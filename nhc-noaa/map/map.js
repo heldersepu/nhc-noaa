@@ -13,14 +13,14 @@ function Map(htmlCanvas) {
     }
 
     function loaded() {
-        var notCached = 0;
+        var reload = false;
         for (var i = 0; i < images.length; i++) {
-            if (!isCached(images[i], i))
-                notCached++;
-            if (notCached > 1)
+            if (!$("#img" + 1000 + i)[0].complete && !isCached(images[i], i)) {
+                reload = true;
                 break;
+            }
         }
-        if (notCached > 0) {
+        if (reload) {
             setTimeout(loaded, 2000);
         } else {
             $("#loader").fadeOut("slow");
