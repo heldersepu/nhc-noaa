@@ -15,7 +15,7 @@ function Map(htmlCanvas) {
     function loaded() {
         var reload = false;
         for (var i = 0; i < images.length; i++) {
-            if (!$("#img" + 1000 + i)[0].complete && !isCached(images[i], i)) {
+            if (!$("#img" + (i + 1000))[0].complete && !isCached(images[i], i)) {
                 reload = true;
                 break;
             }
