@@ -52,7 +52,7 @@ function Map(htmlCanvas) {
     }
 
     function imgSrc(image, id) {
-        return cdn.replace("0", id%10) + "/GOES16_ABI_SECTOR_taw_GEOCOLOR/" + image;
+        return cdn.replace("0", id % 10) + "/api/Image?name=" + image;
     }
 
     function sprite(image, id) {

@@ -22,7 +22,7 @@ namespace nhc_noaa.Controllers
             return Json(obj);
         }
 
-        static private async Task<Images> Download(string domain, string path, string pattern)
+        private async Task<Images> Download(string domain, string path, string pattern)
         {
             var result = new Images();
             var client = new RestClient(domain);
@@ -48,9 +48,12 @@ namespace nhc_noaa.Controllers
                 result[fileName] = (int)response.StatusCode;
                 if (response.StatusCode == HttpStatusCode.OK)
                 {
-                    var fs = File.Create(BaseDir(path) + "\\" + fileName);
-                    await fs.WriteAsync(response.RawBytes, 0, response.RawBytes.Length);
-                    fs.Close();
+                    var filePath = BaseDir(path) + "\\" + fileName;
+                    using (var fs = File.Create(filePath))
+                    {
+                        await fs.WriteAsync(response.RawBytes, 0, response.RawBytes.Length);
+                    }
+                    await (new FileInfo(filePath)).Upload(ConnectionString);
                 }
             }
             return result;
