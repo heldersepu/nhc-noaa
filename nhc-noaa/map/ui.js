@@ -40,25 +40,34 @@ function actionsClick() {
 }
 
 function keyShortcuts(e) {
-    // Pause/Restart the map
+    // (Space) Pauses/Restarts the map
     if (e.charCode === 32) {
         map.togglePause();
     }
-    // Hide the actions pane
+    // (H) Hides the actions pane
     if (e.charCode === 104 || e.charCode === 72) {
         hideActions();
     }
-    // Show the actions pane
+    // (S) Shows the actions pane
     if (e.charCode === 115 || e.charCode === 83) {
         showActions();
         clearTimeout(activityTimeout);
     }
-    // Change speed of the map with the + and -
+    // (+ and -) Changes speed of the map
     if (e.charCode === 43 || e.charCode === 45) {
         var x = e.charCode === 43 ? 2 : -2;
         $("#speed").val(parseInt($("#speed").val()) + x);
         $("#speed").change();
     }
+    // (A) Goes to the Previous image
+    if (e.charCode === 97 || e.charCode === 65) {
+        map.changePos(-1);
+    }
+    // (D) Goes to the next image
+    if (e.charCode === 100 || e.charCode === 68) {
+        map.changePos(1);
+    }
+
 }
 
 function moveBack() {
