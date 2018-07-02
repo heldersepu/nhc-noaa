@@ -33,6 +33,7 @@ namespace nhc_noaa.Controllers
             {
                 string fileName = match.Captures[0].Value.Replace(">", "");
                 result.Add(fileName, 0);
+                // TODO: check the CloudDir
                 if (!File.Exists(BaseDir(path) + "\\" + fileName))
                 {
                     var img = new RestRequest(path + fileName, Method.GET);
