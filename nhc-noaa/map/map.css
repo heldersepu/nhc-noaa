@@ -27,7 +27,7 @@ input {width: 40px;}
 }
 #count {text-align: center;}
 #speed {width: 900px;position:relative;top:6px;}
-#images {width: 1000px; padding: 50px}
+#images {width: 1000px; padding: 40px}
 #images img {
 	height: 9px;
 	width: 20px;
