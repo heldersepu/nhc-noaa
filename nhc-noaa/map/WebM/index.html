@@ -1,0 +1,75 @@
+<meta name="viewport" content="width=device-width" />
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="whammy.js"></script>
+</head>
+<body>
+<div>	
+    <canvas id="canvas" width="1120" height="480" ></canvas>
+    <video id="awesome" width="150" height="150" controls autoplay loop></video><br>
+    <a style="display:none" id="download" download="map.webm">Download WebM</a>	
+</div>
+
+<script>
+    var count = 0
+    var images = [];
+    var video = new Whammy.Video(15);
+
+    $.ajax({
+        type: "GET",
+        url: "/api/Images/EastAtlantic?count=" + 60,
+        cache: false,
+        success: successFunc,
+        error: errorFunc
+    });
+
+    function errorFunc(err) {
+        if (err.responseText === "")
+            alert("Sorry the communication failed.");
+        else
+            alert(err.responseText);
+    }
+
+    function successFunc(data) {
+        images = data;
+        images.reverse();        
+        addFrame();        
+    }
+
+    function drawImage() {
+        var ctx = $('#canvas').getContext('2d');
+        ctx.drawImage(this, x, y);
+        video.add(ctx);
+        count++;            
+        addFrame();
+    }
+
+    function addFrame() {
+        if (count < images.length) {
+            var img = new Image;
+            img.onload = drawImage;
+            img.src = images[count];                        
+        } else {
+            finalizeVideo()
+        }
+    }
+
+    function finalizeVideo() {
+        var start_time = +new Date;
+        video.compile(false, function(output){
+            var end_time = +new Date;
+            var url = webkitURL.createObjectURL(output);
+            $('#canvas').hide();
+            $('#awesome').src = url;
+            $('#download').style.display = '';
+            $('#download').href = url;
+            console.log("Compiled Video in " + (end_time - start_time) + "ms, file size: " + Math.ceil(output.size / 1024) + "KB");
+        });
+    }
+
+    
+</script>
+
+</body>
+</html>
