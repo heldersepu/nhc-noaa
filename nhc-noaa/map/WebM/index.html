@@ -6,9 +6,9 @@
 </head>
 <body>
 <div>
-    <canvas id="canvas" width="1120" height="480" ></canvas>
+    <canvas id="canvas" width="1800" height="1080" ></canvas>
     <div id="output" style="display:none">
-        <video id="awesome" width="150" height="150" controls autoplay loop></video><br>
+        <video id="awesome" width="800" height="600" controls autoplay loop></video><br>
         <a id="download" download="map.webm">Download WebM</a>
     <div>
 </div>
@@ -16,11 +16,11 @@
 <script>
     var count = 0
     var images = [];
-    var video = new Whammy.Video(15);
+    var video = new Whammy.Video(30);
 
     $.ajax({
         type: "GET",
-        url: "/api/Images/EastAtlantic?count=" + 60,
+        url: "/api/Images/EastAtlantic?count=" + 120,
         cache: false,
         success: successFunc,
         error: errorFunc
@@ -41,9 +41,8 @@
 
     function drawImage() {
         var ctx = $('#canvas')[0].getContext('2d');
-        ctx.drawImage(this, x, y);
+        ctx.drawImage(this, 0, 0);
         video.add(ctx);
-        count++;
         addFrame();
     }
 
@@ -51,7 +50,7 @@
         if (count < images.length) {
             var img = new Image;
             img.onload = drawImage;
-            img.src = "/api/Image?name=" + images[count];
+            img.src = "/api/Image?name=" + images[count++];
         } else {
             finalizeVideo()
         }
@@ -61,17 +60,14 @@
         var start_time = +new Date;
         video.compile(false, function(output){
             var end_time = +new Date;
-            var url = webkitURL.createObjectURL(output);
+            var url = URL.createObjectURL(output);
             $('#canvas').hide();
             $('#output').show();
-            $('#awesome').src = url;
-            $('#download').style.display = '';
-            $('#download').href = url;
+            $('#awesome')[0].src = url;
+            $('#download')[0].href = url;
             console.log("Compiled Video in " + (end_time - start_time) + "ms, file size: " + Math.ceil(output.size / 1024) + "KB");
         });
     }
-
-
 </script>
 
 </body>
