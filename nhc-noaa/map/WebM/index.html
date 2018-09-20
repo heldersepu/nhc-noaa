@@ -5,10 +5,12 @@
     <script src="whammy.js"></script>
 </head>
 <body>
-<div>	
+<div>
     <canvas id="canvas" width="1120" height="480" ></canvas>
-    <video id="awesome" width="150" height="150" controls autoplay loop></video><br>
-    <a style="display:none" id="download" download="map.webm">Download WebM</a>	
+    <div id="output" style="display:none">
+        <video id="awesome" width="150" height="150" controls autoplay loop></video><br>
+        <a id="download" download="map.webm">Download WebM</a>
+    <div>
 </div>
 
 <script>
@@ -33,15 +35,15 @@
 
     function successFunc(data) {
         images = data;
-        images.reverse();        
-        addFrame();        
+        images.reverse();
+        addFrame();
     }
 
     function drawImage() {
-        var ctx = $('#canvas').getContext('2d');
+        var ctx = $('#canvas')[0].getContext('2d');
         ctx.drawImage(this, x, y);
         video.add(ctx);
-        count++;            
+        count++;
         addFrame();
     }
 
@@ -49,7 +51,7 @@
         if (count < images.length) {
             var img = new Image;
             img.onload = drawImage;
-            img.src = images[count];                        
+            img.src = "/api/Image?name=" + images[count];
         } else {
             finalizeVideo()
         }
@@ -61,6 +63,7 @@
             var end_time = +new Date;
             var url = webkitURL.createObjectURL(output);
             $('#canvas').hide();
+            $('#output').show();
             $('#awesome').src = url;
             $('#download').style.display = '';
             $('#download').href = url;
@@ -68,7 +71,7 @@
         });
     }
 
-    
+
 </script>
 
 </body>
