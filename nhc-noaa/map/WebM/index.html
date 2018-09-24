@@ -7,9 +7,9 @@
 <body>
 <div>
     <div id="input">
-        <input placeholder="frame rate">
-        <input placeholder="count">
-        <button id="btnAction">START</button>
+        <input id="frameRate" placeholder="frame rate">
+        <input id="frameCount" placeholder="frame count">
+        <button id="btnAction" onclick="btnActionClick()">START</button>
     </div>
     <canvas id="canvas" width="1800" height="1080" ></canvas>
     <div id="output" style="display:none">
@@ -19,17 +19,31 @@
 </div>
 
 <script>
-    var count = 0
+    var count = 0;
     var images = [];
     var video = new Whammy.Video(30);
 
-    $.ajax({
-        type: "GET",
-        url: "/api/Images/EastAtlantic?count=" + 120,
-        cache: false,
-        success: successFunc,
-        error: errorFunc
-    });
+    function btnActionClick() {
+        if ($("#btnAction").text() == "START") {
+            $("#btnAction").text("STOP");
+            start($("#frameRate").val(), $("#frameCount").val());
+        } else {
+            count = 0;
+            images = [];
+            $("#btnAction").text("START");
+        }
+    }
+
+    function start(frameRate, frameCount) {
+        var video = new Whammy.Video(frameRate);
+        $.ajax({
+            type: "GET",
+            url: "/api/Images/EastAtlantic?count=" + frameCount,
+            cache: false,
+            success: successFunc,
+            error: errorFunc
+        });
+    }
 
     function errorFunc(err) {
         if (err.responseText === "")
@@ -56,14 +70,14 @@
             var img = new Image;
             img.onload = drawImage;
             img.src = "/api/Image?name=" + images[count++];
-        } else {
-            finalizeVideo()
+        } else if (images.length > 0 ) {
+            finalizeVideo();
         }
     }
 
     function finalizeVideo() {
         var start_time = +new Date;
-        video.compile(false, function(output){
+        video.compile(false, function(output) {
             var end_time = +new Date;
             var url = URL.createObjectURL(output);
             $('#canvas').hide();
