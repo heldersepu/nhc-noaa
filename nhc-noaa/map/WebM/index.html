@@ -3,6 +3,10 @@
 <head>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="whammy.js"></script>
+    <style>
+        #input {padding: 5px}
+        canvas {width: 80%}
+    </style>
 </head>
 <body>
 <div>
@@ -22,8 +26,19 @@
     var count = 0;
     var images = [];
     var video = new Whammy.Video(30);
+    var ctx = $('#canvas')[0].getContext('2d');
+
+    function addText(str) {
+        ctx.font = "60px Impact";
+        ctx.lineWidth = 3;
+        ctx.shadowColor = "white"
+        ctx.shadowOffsetX = ctx.shadowOffsetY = 2
+        ctx.strokeText(str, 10, 65);
+    }
 
     function btnActionClick() {
+        $('#canvas').show();
+        $('#output').hide();
         if ($("#btnAction").text() == "START") {
             $("#btnAction").text("STOP");
             start($("#frameRate").val(), $("#frameCount").val());
@@ -35,6 +50,7 @@
     }
 
     function start(frameRate, frameCount) {
+        addText("Starting . . .");
         var video = new Whammy.Video(frameRate);
         $.ajax({
             type: "GET",
@@ -59,9 +75,9 @@
     }
 
     function drawImage() {
-        var ctx = $('#canvas')[0].getContext('2d');
         ctx.drawImage(this, 0, 0);
         video.add(ctx);
+        addText(count + "/" + images.length);
         addFrame();
     }
 
@@ -76,6 +92,7 @@
     }
 
     function finalizeVideo() {
+        addText("Finalizing Video . . .")
         var start_time = +new Date;
         video.compile(false, function(output) {
             var end_time = +new Date;
