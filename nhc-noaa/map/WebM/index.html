@@ -11,8 +11,8 @@
 <body>
 <div>
     <div id="input">
-        <input id="frameRate" placeholder="frame rate">
-        <input id="frameCount" placeholder="frame count">
+        <input id="frameRate" placeholder="frame rate" type="number" pattern="\d+" required>
+        <input id="frameCount" placeholder="frame count" type="number" pattern="\d+" required>
         <button id="btnAction" onclick="btnActionClick()">START</button>
     </div>
     <canvas id="canvas" width="1800" height="1080" ></canvas>
