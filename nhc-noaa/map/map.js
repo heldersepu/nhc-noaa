@@ -8,7 +8,7 @@ function Map(htmlCanvas) {
     changeCount();
 
     function loading() {
-        $("#loader").show();
+        $(".lds-roller").show();
         $("#controls input").prop("disabled", true);
     }
 
@@ -23,7 +23,7 @@ function Map(htmlCanvas) {
         if (reload) {
             setTimeout(loaded, 2000);
         } else {
-            $("#loader").fadeOut("slow");
+            $(".lds-roller").fadeOut("slow");
             $("#controls input").prop("disabled", false);
         }
     }

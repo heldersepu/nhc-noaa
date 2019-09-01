@@ -34,10 +34,10 @@ input {width: 40px;}
 	padding-top: 1px;
 	padding-left: 1px;
 }
-#loader {
+.lds-roller {
 	z-index: 10;
 	position: absolute;
-	top: 40px;
+	top: 80px;
 	left: 20%;
 }
 .active {
@@ -53,9 +53,96 @@ input {width: 40px;}
 	div {padding: 0px;}
 	#map, #data img, #images { width: 100%; }
 	#images { width: 80%; padding: 10%;}
-	#loader { top: 60px; left: 50px;	}
+	.lds-roller { top: 60px; left: 50px;	}
 	#speed { width: 50%; }
 }
 @media (max-width : 480px) {
-	#loader { top: 10px; left: 50px;	}
+	.lds-roller { top: 10px; left: 50px;	}
 }
+
+  .lds-roller {
+	display: inline-block;
+	position: relative;
+	width: 64px;
+	height: 64px;
+  }
+  .lds-roller div {
+	animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+	transform-origin: 32px 32px;
+	padding: 0px;
+  }
+  .lds-roller div:after {
+	content: " ";
+	display: block;
+	position: absolute;
+	width: 12px;
+	height: 12px;
+	border-radius: 50%;
+	background: #fff;
+	margin: -3px 0 0 -3px;
+  }
+  .lds-roller div:nth-child(1) {
+	animation-delay: -0.036s;
+  }
+  .lds-roller div:nth-child(1):after {
+	top: 100px;
+	left: 100px;
+  }
+  .lds-roller div:nth-child(2) {
+	animation-delay: -0.072s;
+  }
+  .lds-roller div:nth-child(2):after {
+	top: 108px;
+	left: 90px;
+  }
+  .lds-roller div:nth-child(3) {
+	animation-delay: -0.108s;
+  }
+  .lds-roller div:nth-child(3):after {
+	top: 114px;
+	left: 78px;
+  }
+  .lds-roller div:nth-child(4) {
+	animation-delay: -0.144s;
+  }
+  .lds-roller div:nth-child(4):after {
+	top: 116px;
+	left: 64px;
+  }
+  .lds-roller div:nth-child(5) {
+	animation-delay: -0.18s;
+  }
+  .lds-roller div:nth-child(5):after {
+	top: 114px;
+	left: 50px;
+  }
+  .lds-roller div:nth-child(6) {
+	animation-delay: -0.216s;
+  }
+  .lds-roller div:nth-child(6):after {
+	top: 108px;
+	left: 38px;
+  }
+  .lds-roller div:nth-child(7) {
+	animation-delay: -0.252s;
+  }
+  .lds-roller div:nth-child(7):after {
+	top: 100px;
+	left: 28px;
+  }
+  .lds-roller div:nth-child(8) {
+	animation-delay: -0.288s;
+  }
+  .lds-roller div:nth-child(8):after {
+	top: 90px;
+	left: 20px;
+  }
+  @keyframes lds-roller {
+	0% {
+	  transform: rotate(0deg);
+	}
+	100% {
+	  transform: rotate(360deg);
+	}
+  }
+  

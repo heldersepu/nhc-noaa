@@ -19,7 +19,7 @@ function showActions() {
 }
 
 function timeoutActions() {
-    if ($("#loader").css('display') === 'none') {
+    if ($(".lds-roller").css('display') === 'none') {
         hideActions();
     } else {
         $("#images").children().click(imageClick);
