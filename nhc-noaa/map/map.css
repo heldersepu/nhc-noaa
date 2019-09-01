@@ -80,6 +80,9 @@ input {width: 40px;}
 	border-radius: 50%;
 	background: #fff;
 	margin: -3px 0 0 -3px;
+	-webkit-box-shadow: 2px 2px 1px 0px rgba(0,0,0,0.75);
+	-moz-box-shadow: 2px 2px 1px 0px rgba(0,0,0,0.75);
+	box-shadow: 2px 2px 1px 0px rgba(0,0,0,0.75);
   }
   .lds-roller div:nth-child(1) {
 	animation-delay: -0.036s;
