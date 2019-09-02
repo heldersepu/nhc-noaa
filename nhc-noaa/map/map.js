@@ -52,8 +52,8 @@ function Map(htmlCanvas) {
     }
 
     function imgSrc(image) {
-        var id = Number(image.substr(0,11))
-        return cdn.replace("0", id % 10) + "/api/Image?name=" + image;
+        var id = Number(image.substr(0, 10))
+        return cdn.replace("0", id % 9) + "/api/Image?name=" + image;
     }
 
     function sprite(image, id) {
