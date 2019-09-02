@@ -45,8 +45,9 @@ input {width: 40px;}
 	background: red;
 }
 .sprite {
-	height: 22px;
+	height: 25px;
 	width: 1100px;
+	transform: scale(0.8);
 }
 
 @media (max-width : 1160px) {
