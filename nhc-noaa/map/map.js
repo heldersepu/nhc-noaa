@@ -51,7 +51,8 @@ function Map(htmlCanvas) {
         });
     }
 
-    function imgSrc(image, id) {
+    function imgSrc(image) {
+        var id = Number(image.substr(0,11))
         return cdn.replace("0", id % 10) + "/api/Image?name=" + image;
     }
 
