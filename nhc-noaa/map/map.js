@@ -15,7 +15,7 @@ function Map(htmlCanvas) {
     function loaded() {
         var reload = false;
         for (var i = 0; i < images.length; i++) {
-            if (!$("#img" + (i + 1000))[0].complete && !isCached(images[i], i)) {
+            if (!$("#img" + (i + 1000))[0].complete && !isCached(images[i])) {
                 reload = true;
                 break;
             }
@@ -58,7 +58,7 @@ function Map(htmlCanvas) {
 
     function sprite(image, id) {
         var imgTag = "<img class='sprite' id='sprite" + id + "' " +
-            "style='background:url(" + imgSrc(image, id) + ") -450px -1052px'><br />";
+            "style='background:url(" + imgSrc(image) + ") -450px -1052px'><br />";
         $("#data").append(imgTag);
     }
 
@@ -120,7 +120,7 @@ function Map(htmlCanvas) {
 
     function updateImage(i) {
         var image = $("#img" + (i + 1000));
-        image.attr("src", imgSrc(images[i], i));
+        image.attr("src", imgSrc(images[i]));
         image.attr("title", images[i]);
         if (i + 1 === images.length) {
             changeSpeed();
@@ -131,9 +131,9 @@ function Map(htmlCanvas) {
         }
     }
 
-    function isCached(src, i) {
+    function isCached(src) {
         var image = new Image();
-        image.src = imgSrc(src, i);
+        image.src = imgSrc(src);
         return image.complete;
     }
 
@@ -147,7 +147,7 @@ function Map(htmlCanvas) {
         for (var i = 0; i < images.length; i++) {
             appendImage(i);
             var delay = i * 100;
-            if ($.inArray(images[i], imgs) > 0 || isCached(images[i], i))
+            if ($.inArray(images[i], imgs) > 0 || isCached(images[i]))
                 delay = i * 8;
             setTimeout(updateImage.bind(null, i), delay);
         }
