@@ -24,10 +24,12 @@ namespace nhc_noaa.Controllers
 
         private async Task<Images> Download(string domain, string path, string pattern)
         {
+            System.Net.ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
             var result = new Images();
             var client = new RestClient(domain);
+            client.AddDefaultHeader("User-Agent", "Mozilla/5.0");
             var restTasks = new List<Task<IRestResponse>>();
-            var response = client.Get(new RestRequest(path, Method.GET));
+            var response = client.Execute(new RestRequest(path, Method.GET));
 
             foreach (Match match in Regex.Matches(response.Content, pattern))
             {
@@ -37,7 +39,7 @@ namespace nhc_noaa.Controllers
                 {
                     var img = new RestRequest(path + fileName, Method.GET);
                     img.AddParameter("fileName", fileName);
-                    restTasks.Add(client.ExecuteTaskAsync(img));
+                    restTasks.Add(client.ExecuteAsync(img));
                 }
             }
 
