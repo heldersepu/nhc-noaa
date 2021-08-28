@@ -54,7 +54,7 @@
         addText("Starting . . .");
         $.ajax({
             type: "GET",
-            url: "/Images/EastAtlantic?count=" + frameCount,
+            url: "/api/Images/EastAtlantic?count=" + frameCount,
             cache: false,
             success: successFunc,
             error: errorFunc
