@@ -29,6 +29,7 @@
     var stream = canvas.captureStream(5);
     var mediaRecorder = new MediaRecorder(stream, { mimeType: "video/webm; codecs=vp9" });
     mediaRecorder.ondataavailable = saveChunks;
+    mediaRecorder.onpause = pauseVideo;
     mediaRecorder.onstop = finalizeVideo;
 
     function addText(str) {
@@ -87,8 +88,6 @@
         video.push(event.data);
         if (mediaRecorder.state !== "inactive")
             mediaRecorder.pause();
-        addText(count + "/" + images.length);
-        addFrame();
     }
 
     function addFrame() {
@@ -96,9 +95,15 @@
             var img = new Image;
             img.onload = drawImage;
             img.src = "/api/Image?name=" + images[count++];
-        } else if (images.length > 0 ) {
-            mediaRecorder.stop()
+        } else if (images.length > 0) {
+            if (mediaRecorder.state !== "inactive")
+                mediaRecorder.stop()
         }
+    }
+
+    function pauseVideo() {
+        addText(count + "/" + images.length);
+        addFrame();
     }
 
     function finalizeVideo() {
