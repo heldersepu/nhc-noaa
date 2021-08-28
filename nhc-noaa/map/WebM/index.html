@@ -30,7 +30,6 @@
     var mediaRecorder = new MediaRecorder(stream, { mimeType: "video/webm; codecs=vp9" });
     mediaRecorder.ondataavailable = saveChunks;
     mediaRecorder.onstop = finalizeVideo;
-    mediaRecorder.start(100)
 
     function addText(str) {
         ctx.font = "60px Impact";
@@ -80,7 +79,10 @@
     function drawImage() {
         ctx.drawImage(this, 0, 0);
         addText(count + "/" + images.length);
-        mediaRecorder.resume()
+        if (recorder.state === "paused")
+            mediaRecorder.resume()
+        else
+            mediaRecorder.start(100)
     }
     function saveChunks(event) {
         video.push(event.data);
