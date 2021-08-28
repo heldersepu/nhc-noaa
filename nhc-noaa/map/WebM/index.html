@@ -78,14 +78,14 @@
 
     function drawImage() {
         ctx.drawImage(this, 0, 0);
-        if (recorder.state === "paused")
+        if (mediaRecorder.state === "paused")
             mediaRecorder.resume()
         else
             mediaRecorder.start(100)
     }
     function saveChunks(event) {
         video.push(event.data);
-        if (recorder.state !== "inactive")
+        if (mediaRecorder.state !== "inactive")
             mediaRecorder.pause();
         addText(count + "/" + images.length);
         addFrame();
