@@ -121,7 +121,6 @@
     <Content Include="map\ui.js" />
     <Content Include="map\page-loader.gif" />
     <Content Include="map\WebM\index.html" />
-    <Content Include="map\WebM\whammy.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
