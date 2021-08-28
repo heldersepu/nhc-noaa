@@ -2,7 +2,6 @@
 <html>
 <head>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="whammy.js"></script>
     <style>
         #input {padding: 5px}
         canvas {width: 80%}
@@ -11,7 +10,6 @@
 <body>
 <div>
     <div id="input">
-        <input id="frameRate" placeholder="frame rate" type="number" pattern="\d+" value="1" required>
         <input id="frameCount" placeholder="frame count" type="number" pattern="\d+" value="10" required>
         <button id="btnAction" onclick="btnActionClick()">START</button>
     </div>
@@ -25,8 +23,11 @@
 <script>
     var count = 0;
     var images = [];
-    var video = new Whammy.Video(30);
-    var ctx = $('#canvas')[0].getContext('2d');
+    var video = [];
+    var canvas = $('#canvas')[0]
+    var ctx = canvas.getContext('2d');
+    var stream = canvas.captureStream(25 /*fps*/);
+    var mediaRecorder = new MediaRecorder(stream, { mimeType: "video/webm; codecs=vp9" });
 
     function addText(str) {
         ctx.font = "60px Impact";
@@ -41,7 +42,7 @@
         $('#output').hide();
         if ($("#btnAction").text() == "START") {
             $("#btnAction").text("STOP");
-            start($("#frameRate").val(), $("#frameCount").val());
+            start($("#frameCount").val());
         } else {
             count = 0;
             images = [];
@@ -49,12 +50,11 @@
         }
     }
 
-    function start(frameRate, frameCount) {
+    function start(frameCount) {
         addText("Starting . . .");
-        var video = new Whammy.Video(frameRate);
         $.ajax({
             type: "GET",
-            url: "/api/Images/EastAtlantic?count=" + frameCount,
+            url: "/Images/EastAtlantic?count=" + frameCount,
             cache: false,
             success: successFunc,
             error: errorFunc
@@ -62,10 +62,10 @@
     }
 
     function errorFunc(err) {
-        if (err.responseText === "")
-            alert("Sorry the communication failed.");
-        else
+        if (err.responseText)
             alert(err.responseText);
+        else
+            alert("Sorry the communication failed.");
     }
 
     function successFunc(data) {
@@ -76,9 +76,13 @@
 
     function drawImage() {
         ctx.drawImage(this, 0, 0);
-        video.add(ctx);
         addText(count + "/" + images.length);
-        addFrame();
+        mediaRecorder.start()
+        mediaRecorder.ondataavailable = function (event) {
+            video.push(event.data);
+            mediaRecorder.stop();
+            addFrame();
+        }
     }
 
     function addFrame() {
@@ -92,17 +96,16 @@
     }
 
     function finalizeVideo() {
-        addText("            Finalizing Video . . .")
+        addText("              Finalizing Video . . .")
         var start_time = +new Date;
-        video.compile(false, function(output) {
-            var end_time = +new Date;
-            var url = URL.createObjectURL(output);
-            $('#canvas').hide();
-            $('#output').show();
-            $('#awesome')[0].src = url;
-            $('#download')[0].href = url;
-            console.log("Compiled Video in " + (end_time - start_time) + "ms, file size: " + Math.ceil(output.size / 1024) + "KB");
-        });
+        var blob = new Blob(video, {type: "video/webm" })
+        var url = URL.createObjectURL(blob);
+        $('#canvas').hide();
+        $('#output').show();
+        $('#awesome')[0].src = url;
+        $('#download')[0].href = url;
+        var end_time = +new Date;
+        console.log("Compiled Video in " + (end_time - start_time) + "ms");
     }
 </script>
 
